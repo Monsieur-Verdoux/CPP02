@@ -5,13 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovalev <akovalev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 16:36:24 by akovalev          #+#    #+#             */
-/*   Updated: 2024/09/10 18:22:46 by akovalev         ###   ########.fr       */
+/*   Created: 2024/09/10 16:09:53 by akovalev          #+#    #+#             */
+/*   Updated: 2024/09/10 18:36:37 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <iostream>
+#include <cmath>
 
 Fixed::Fixed(): _fixedPointValue(0)
 {
@@ -47,4 +48,31 @@ void Fixed::setRawBits(int const raw)
 {
 	std::cout << "setRawBits member function called" << std::endl;
 	_fixedPointValue= raw;
+}
+
+Fixed::Fixed(int const int_val)
+{
+	std::cout << "Int constructor called" << std::endl;
+	this->_fixedPointValue = int_val << this->_fractionalBits;
+}
+
+Fixed::Fixed(float const float_val)
+{
+	std::cout << "Float constructor called" << std::endl;
+	this->_fixedPointValue = roundf(float_val * (1 << this->_fractionalBits));
+}
+
+float Fixed::toFloat(void) const
+{
+	return(static_cast<float>(_fixedPointValue) / (1 << _fractionalBits));
+}
+
+int Fixed::toInt(void) const
+{
+	return(_fixedPointValue >> _fractionalBits);
+}
+
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
+{
+	return(out << fixed.toFloat());
 }
