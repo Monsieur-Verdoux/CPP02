@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:09:53 by akovalev          #+#    #+#             */
-/*   Updated: 2024/09/11 19:17:45 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/09/11 21:00:37 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,3 +76,101 @@ std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
 {
 	return(out << fixed.toFloat());
 }
+
+bool Fixed::operator>(const Fixed& fixed) const
+{
+	return (this->getRawBits() > fixed.getRawBits());
+}
+
+bool Fixed::operator<(const Fixed& fixed) const
+{
+	return (this->getRawBits() < fixed.getRawBits());
+}
+
+bool Fixed::operator>=(const Fixed& fixed) const
+{
+	return (this->getRawBits() >= fixed.getRawBits());
+}
+
+bool Fixed::operator<=(const Fixed& fixed) const
+{
+	return (this->getRawBits() <= fixed.getRawBits());
+}
+
+bool Fixed::operator==(const Fixed& fixed) const
+{
+	return (this->getRawBits() == fixed.getRawBits());
+}
+bool Fixed::operator!=(const Fixed& fixed) const
+{
+	return (this->getRawBits() != fixed.getRawBits());
+}
+
+Fixed Fixed::operator+(const Fixed& fixed) const
+{
+	Fixed temp;
+
+	temp.setRawBits(this->getRawBits() + fixed.getRawBits());
+	return (temp);
+}
+Fixed Fixed::operator-(const Fixed& fixed) const
+{
+	Fixed temp;
+
+	temp.setRawBits(this->getRawBits() - fixed.getRawBits());
+	return (temp);
+}
+Fixed Fixed::operator*(const Fixed& fixed) const
+{
+	Fixed temp;
+
+	temp.setRawBits(static_cast<int>(static_cast<long long>(this->getRawBits()) * static_cast<long long>(fixed.getRawBits()) >> _fractionalBits));
+	return (temp);
+}
+Fixed Fixed::operator/(const Fixed& fixed) const
+{
+	Fixed temp;
+
+	if (fixed.getRawBits() == 0)
+	{
+		std::cout << "Error: divison by zero" << std::endl;
+		return Fixed(0);
+	}
+	temp.setRawBits(static_cast<int>((static_cast<long long>(this->getRawBits()) << _fractionalBits) / fixed.getRawBits()));
+	return (temp);
+}
+
+Fixed& Fixed::operator++()
+{
+	
+}
+Fixed& Fixed::operator++(int)
+{
+	
+}
+Fixed& Fixed::operator--()
+{
+	
+}
+Fixed& Fixed::operator--(int)
+{
+	
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b)
+{
+	
+}
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
+{
+	
+}
+Fixed& Fixed::max(Fixed& a, Fixed& b)
+{
+	
+}
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
+{
+	
+}
+		
