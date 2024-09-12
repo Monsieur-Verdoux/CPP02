@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:09:53 by akovalev          #+#    #+#             */
-/*   Updated: 2024/09/11 21:00:37 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:33:50 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,35 +142,41 @@ Fixed Fixed::operator/(const Fixed& fixed) const
 
 Fixed& Fixed::operator++()
 {
-	
+	++this->_fixedPointValue;
+	return (*this);
 }
-Fixed& Fixed::operator++(int)
+Fixed Fixed::operator++(int)
 {
-	
+	Fixed temp(*this);
+	++this->_fixedPointValue;
+	return(temp);
 }
 Fixed& Fixed::operator--()
 {
-	
+	--this->_fixedPointValue;
+	return (*this);
 }
-Fixed& Fixed::operator--(int)
+Fixed Fixed::operator--(int)
 {
-	
+	Fixed temp(*this);
+	--this->_fixedPointValue;
+	return(temp);	
 }
 
 Fixed& Fixed::min(Fixed& a, Fixed& b)
 {
-	
+	return (a < b ? a : b);
 }
 const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
 {
-	
+	return (a < b ? a : b);
 }
 Fixed& Fixed::max(Fixed& a, Fixed& b)
 {
-	
+	return (a > b ? a : b);
 }
 const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
 {
-	
+	return (a > b ? a : b);
 }
 		
